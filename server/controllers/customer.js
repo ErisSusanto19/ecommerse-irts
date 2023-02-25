@@ -55,7 +55,7 @@ class CustomerController{
         try {
             const customers = await Customer.findAll({
                 attributes: {exclude: ['password']},
-                order: [['updatedAt', 'DESC']]
+                order: [['createdAt', 'DESC']]
             })
 
             res.status(200).json(customers)

@@ -5,16 +5,10 @@ class ProductController{
     static async getProducts(req, res, next){
         try {
             const format = {
-                order: [['id', 'DESC']],
-                limit: 9,
-                offset: 0
+                order: [['id', 'DESC']]
             }
 
-            const { n, page } = req.query
-
-            if(page){
-                format.offset = page * 9 - 9
-            }
+            const { name } = req.query
 
             if(name){
                 format.where = {
@@ -24,7 +18,7 @@ class ProductController{
                 }
             }
 
-            const products = await Product.findAndCountAll(format)
+            const products = await Product.findAll(format)
 
             res.status(200).json(products)
         } catch (error) {
